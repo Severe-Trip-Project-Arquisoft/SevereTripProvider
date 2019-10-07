@@ -23,7 +23,7 @@ public class ProviderController {
     @GetMapping("/provider/{id}")
     public ResponseEntity<Provider> getProvider(@PathVariable(value = "id") String id){
         Provider prov = providerService.getProvider(id);
-        if (!prov.equals(null)){
+        if (prov!=null){
             return ResponseEntity.ok(prov);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -33,7 +33,7 @@ public class ProviderController {
     @PostMapping(path ="/insertProvider", consumes = "application/json")
     public ResponseEntity<Long> createProvider(@RequestBody Provider provider) {
             Provider prov = providerService.getProvider(provider.getProviderId() );
-            if (prov.equals(null)){
+            if (prov==null){
                 providerService.createProvider(provider);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }else{
@@ -44,7 +44,7 @@ public class ProviderController {
     @PutMapping(path ="/insertProvider", consumes = "application/json")
     public ResponseEntity<Long> updateProvider(@RequestBody Provider provider) {
         Provider prov = providerService.getProvider(provider.getProviderId() );
-        if (!prov.equals(null) && prov.getId()==provider.getId()){
+        if (prov!=null && prov.getId()==provider.getId()){
             providerService.updateProvider(provider);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }else{
