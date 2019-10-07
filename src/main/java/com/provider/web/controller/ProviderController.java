@@ -27,17 +27,16 @@ public class ProviderController {
 
     @PostMapping(path ="/insertProvider", consumes = "application/json")
     public ResponseEntity<Long> createProvider(@RequestBody Provider provider) {
-        try{
-            Provider prov = providerService.getProvider(provider.getProvider_id() );
-            if (prov.equals(null)){
-                providerService.createProvider(provider);
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }else{
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>((long) -1,HttpStatus.FORBIDDEN);
-        }
+            providerService.createProvider(provider);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+            //Provider prov = providerService.getProvider(provider.getProviderId() );
+            //if (prov.equals(null)){
+            //    providerService.createProvider(provider);
+            //    return new ResponseEntity<>(HttpStatus.CREATED);
+            //}else{
+            //    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //}
+
 
     }
 

@@ -4,7 +4,10 @@ import com.provider.web.entity.Provider;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 @Repository
-public interface ProviderRepository extends MongoRepository<Provider, String> {
-    Provider findProviderByProvider_id(String provider_id);
+public interface ProviderRepository extends MongoRepository<Provider, Serializable> {
+    Provider findFirstBy(String providerId);
+
 }

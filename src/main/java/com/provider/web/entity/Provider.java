@@ -13,15 +13,15 @@ import java.util.Date;
 
 @Document(collection = "Provider")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 public class Provider implements Serializable {
     @Id
     @NotNull
     private long id;
 
     @NotBlank
-    private String provider_id;
+    private String providerId;
 
     @NotBlank
     private String firtsName;
@@ -35,7 +35,7 @@ public class Provider implements Serializable {
     @NotBlank
     private String bankAccount;
 
-    private Date updateDate;
+    private String updateDate;
 
     @NotBlank
     private String email;
@@ -49,25 +49,37 @@ public class Provider implements Serializable {
     @NotBlank
     private  String cellphone;
 
-    //public Provider() {
-    //}
+    public long getId() {
+        return id;
+    }
 
-//    public Provider(@NotNull long id, @NotBlank String provider_id, @NotBlank String firtsName, @NotBlank String secondName, @NotNull int yearsExperience, @NotBlank String bankAccount, Date updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
-//        this.id = id;
-//        this.provider_id = provider_id;
-//        this.firtsName = firtsName;
-//        this.secondName = secondName;
-//        this.yearsExperience = yearsExperience;
-//        this.bankAccount = bankAccount;
-//        this.updateDate = updateDate;
-//        this.email = email;
-//        this.address = address;
-//        this.country = country;
-//        this.cellphone = cellphone;
-//    }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getProvider_id() {
-        return provider_id;
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
+    public Provider() {
+    }
+
+    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firtsName, @NotBlank String secondName, @NotNull int yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
+        this.id = id;
+        this.providerId = providerId;
+        this.firtsName = firtsName;
+        this.secondName = secondName;
+        this.yearsExperience = yearsExperience;
+        this.bankAccount = bankAccount;
+        this.updateDate = updateDate;
+        this.email = email;
+        this.address = address;
+        this.country = country;
+        this.cellphone = cellphone;
+    }
+
+    public String getProviderId() {
+        return providerId;
     }
 
     public String getFirtsName() {
@@ -102,11 +114,11 @@ public class Provider implements Serializable {
         this.bankAccount = bankAccount;
     }
 
-    public Date getUpdateDate() {
+    public String getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 
