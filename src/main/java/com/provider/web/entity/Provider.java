@@ -28,8 +28,8 @@ public class Provider implements Serializable {
     private String providerId;
 
     @NotBlank
-    @Size(min = 1, max = 128, message = "firtsName must be between 1 and 128 characters")
-    private String firtsName;
+    @Size(min = 1, max = 128, message = "firstName must be between 1 and 128 characters")
+    private String firstName;
 
     @NotBlank
     @Size(min = 1, max = 128, message = "secondName must be between 1 and 128 characters")
@@ -71,10 +71,10 @@ public class Provider implements Serializable {
     public Provider() {
     }
 
-    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firtsName, @NotBlank String secondName, @NotNull Double yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
+    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firstName, @NotBlank String secondName, @NotNull Double yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
         this.id = id;
         this.providerId = providerId;
-        this.firtsName = firtsName;
+        this.firstName = firstName;
         this.secondName = secondName;
         this.yearsExperience = yearsExperience;
         this.bankAccount = bankAccount;
@@ -89,12 +89,12 @@ public class Provider implements Serializable {
         return providerId;
     }
 
-    public String getFirtsName() {
-        return firtsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirtsName(String firtsName) {
-        this.firtsName = firtsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getSecondName() {

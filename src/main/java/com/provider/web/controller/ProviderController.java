@@ -4,6 +4,7 @@ import com.provider.web.entity.Provider;
 import com.provider.web.service.ProviderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,17 @@ public class ProviderController {
             }
     }
 
-    @PutMapping(path ="/insertProvider", consumes = "application/json")
+    @PutMapping(path = "/updateProvider/{id}")
+    public void updateClient(@RequestBody Provider provider, @PathVariable(value = "id") String id){
+        Provider prov = providerService.getProvider(id);
+        if (prov!= null){
+            providerService.deleteProvider(prov);
+            providerService.createProvider(provider);
+        }else{
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     public ResponseEntity<Long> updateProvider(@RequestBody Provider provider) {
         Provider prov = providerService.getProvider(provider.getProviderId() );
         if (prov!=null && prov.getId()==provider.getId()){
@@ -49,6 +60,16 @@ public class ProviderController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @DeleteMapping(path = "/deleteProvider/{id}")
+    public void deleteClient(@PathVariable(value = "id") String id){
+        Provider pro = providerService.getProvider(id);
+        if (pro!= null){
+            providerService.deleteProvider(pro);
+        }else{
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
