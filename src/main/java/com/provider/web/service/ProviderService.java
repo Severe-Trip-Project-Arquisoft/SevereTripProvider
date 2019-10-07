@@ -12,10 +12,14 @@ public class ProviderService {
     @Autowired
     private ProviderRepository providerRepository;
 
-    public Provider getProvider(String providerId){ return providerRepository.findFirstBy(providerId); }
+    public Provider getProvider(String providerId){ return providerRepository.findFirstByProviderId(providerId); }
 
     public Provider createProvider(Provider newProvider){
         return providerRepository.save(newProvider);
+    }
+
+    public Provider updateProvider(Provider upProvider){
+        return providerRepository.save(upProvider);
     }
 
 }

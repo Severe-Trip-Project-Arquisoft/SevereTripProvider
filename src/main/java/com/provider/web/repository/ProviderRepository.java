@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 @Repository
 public interface ProviderRepository extends MongoRepository<Provider, Serializable> {
-    Provider findFirstBy(String providerId);
+
+    Provider findFirstByProviderId(String providerId);
 
 }

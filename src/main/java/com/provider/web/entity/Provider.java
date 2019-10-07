@@ -6,8 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,13 +28,16 @@ public class Provider implements Serializable {
     private String providerId;
 
     @NotBlank
+    @Size(min = 1, max = 128, message = "firtsName must be between 1 and 128 characters")
     private String firtsName;
 
     @NotBlank
+    @Size(min = 1, max = 128, message = "secondName must be between 1 and 128 characters")
     private String secondName;
 
     @NotNull
-    private int yearsExperience;
+    @DecimalMin(value = "0.0", message = "yearsExperience must be greater than 0")
+    private Double yearsExperience;
 
     @NotBlank
     private String bankAccount;
@@ -64,7 +71,7 @@ public class Provider implements Serializable {
     public Provider() {
     }
 
-    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firtsName, @NotBlank String secondName, @NotNull int yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
+    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firtsName, @NotBlank String secondName, @NotNull Double yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
         this.id = id;
         this.providerId = providerId;
         this.firtsName = firtsName;
@@ -98,11 +105,11 @@ public class Provider implements Serializable {
         this.secondName = secondName;
     }
 
-    public int getYearsExperience() {
+    public Double getYearsExperience() {
         return yearsExperience;
     }
 
-    public void setYearsExperience(int yearsExperience) {
+    public void setYearsExperience(Double yearsExperience) {
         this.yearsExperience = yearsExperience;
     }
 
