@@ -22,7 +22,7 @@ import java.util.Date;
 public class Provider implements Serializable {
     @Id
     @NotNull
-    private long id;
+    private String id;
 
     @NotBlank
     private String providerId;
@@ -56,22 +56,8 @@ public class Provider implements Serializable {
     @NotBlank
     private  String cellphone;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
-    }
-
-    public Provider() {
-    }
-
-    public Provider(@NotNull long id, @NotBlank String providerId, @NotBlank String firstName, @NotBlank String secondName, @NotNull Double yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
+    public Provider(@NotNull String id, @NotBlank String providerId, @NotBlank String firstName, @NotBlank String secondName, @NotNull Double yearsExperience, @NotBlank String bankAccount, String updateDate, @NotBlank String email, @NotBlank String address, @NotBlank String country, @NotBlank String cellphone) {
         this.id = id;
         this.providerId = providerId;
         this.firstName = firstName;
@@ -85,8 +71,20 @@ public class Provider implements Serializable {
         this.cellphone = cellphone;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getProviderId() {
         return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 
     public String getFirstName() {
@@ -159,5 +157,22 @@ public class Provider implements Serializable {
 
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "id='" + id + '\'' +
+                ", providerId='" + providerId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", yearsExperience=" + yearsExperience +
+                ", bankAccount='" + bankAccount + '\'' +
+                ", updateDate='" + updateDate + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", country='" + country + '\'' +
+                ", cellphone='" + cellphone + '\'' +
+                '}';
     }
 }

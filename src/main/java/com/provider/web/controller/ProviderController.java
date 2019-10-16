@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/providers")
@@ -21,6 +23,12 @@ public class ProviderController {
     public String msg(){
         return "PROVIDERS AVAIABLE";
     }
+
+    @GetMapping("/allProviders")
+    public List<Provider> getAllClients(){
+        return providerService.getAllProvider();
+    }
+
     @GetMapping("/provider/{id}")
     public ResponseEntity<Provider> getProvider(@PathVariable(value = "id") String id){
         Provider prov = providerService.getProvider(id);
