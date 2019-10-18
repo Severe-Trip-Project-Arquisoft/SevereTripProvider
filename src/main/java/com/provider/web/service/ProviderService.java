@@ -20,6 +20,10 @@ public class ProviderService {
     }
 
     public Provider getProvider(String providerId){
+        return providerRepository.getById(providerId);
+    }
+
+    public Provider getProviderByCustId(String providerId){
 
         return providerRepository.findFirstByProviderId(providerId);
     }

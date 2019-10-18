@@ -2,6 +2,8 @@ package com.provider.web.controller;
 
 import com.provider.web.entity.Provider;
 import com.provider.web.service.ProviderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(value="Provider Controller", description="Operations pertaining to Provider in Severe Trip System")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/providers")
@@ -19,16 +22,14 @@ public class ProviderController {
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping
-    public String msg(){
-        return "PROVIDERS AVAIABLE";
-    }
 
+    @ApiOperation(value = "Get all providers", response = List.class)
     @GetMapping("/allProviders")
     public List<Provider> getAllClients(){
         return providerService.getAllProvider();
     }
 
+    @ApiOperation(value = "Get a provider by id", response = Provider.class)
     @GetMapping("/provider/{id}")
     public ResponseEntity<Provider> getProvider(@PathVariable(value = "id") String id){
         Provider prov = providerService.getProvider(id);
@@ -39,17 +40,19 @@ public class ProviderController {
         }
     }
 
+    @ApiOperation(value = "Insert a provider", response = String.class)
     @PostMapping(path ="/insertProvider", consumes = "application/json")
-    public ResponseEntity<Long> createProvider(@RequestBody Provider provider) {
-            Provider prov = providerService.getProvider(provider.getProviderId() );
+    public ResponseEntity<String> createProvider(@RequestBody Provider provider) {
+            Provider prov = providerService.getProviderByCustId(provider.getProviderId() );
             if (prov==null){
-                providerService.createProvider(provider);
-                return new ResponseEntity<>(HttpStatus.CREATED);
+                Provider created = providerService.createProvider(provider);
+                return new ResponseEntity<>(created.getId(),HttpStatus.CREATED);
             }else{
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
     }
 
+    @ApiOperation(value = "Update a provider")
     @PutMapping(path = "/updateProvider/{id}")
     public void updateClient(@RequestBody Provider provider, @PathVariable(value = "id") String id){
         Provider prov = providerService.getProvider(id);
@@ -61,16 +64,8 @@ public class ProviderController {
         }
     }
 
-    public ResponseEntity<Long> updateProvider(@RequestBody Provider provider) {
-        Provider prov = providerService.getProvider(provider.getProviderId() );
-        if (prov!=null && prov.getId()==provider.getId()){
-            providerService.updateProvider(provider);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
 
+    @ApiOperation(value = "Delete a provider")
     @DeleteMapping(path = "/deleteProvider/{id}")
     public void deleteClient(@PathVariable(value = "id") String id){
         Provider pro = providerService.getProvider(id);

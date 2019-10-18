@@ -1,6 +1,7 @@
 package com.provider.web.entity;
 
 import com.sun.istack.NotNull;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.Date;
 @Document(collection = "Provider")
 @Data
 
-
+@ApiModel(description = "Details about Provider entity. ")
 public class Provider implements Serializable {
     @Id
     @NotNull

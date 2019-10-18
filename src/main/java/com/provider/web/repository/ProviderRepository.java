@@ -10,5 +10,6 @@ import java.io.Serializable;
 public interface ProviderRepository extends MongoRepository<Provider, Serializable> {
 
     Provider findFirstByProviderId(String providerId);
+    Provider getById(String id);
 
 }
