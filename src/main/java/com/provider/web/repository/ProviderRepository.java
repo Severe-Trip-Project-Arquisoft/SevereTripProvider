@@ -11,5 +11,6 @@ public interface ProviderRepository extends MongoRepository<Provider, Serializab
 
     Provider findFirstByProviderId(String providerId);
     Provider getById(String id);
+    Boolean existsByProviderId(String providerId);
 
 }

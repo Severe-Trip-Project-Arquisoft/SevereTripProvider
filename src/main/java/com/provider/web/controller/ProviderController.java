@@ -29,10 +29,10 @@ public class ProviderController {
         return providerService.getAllProvider();
     }
 
-    @ApiOperation(value = "Get a provider by id", response = Provider.class)
-    @GetMapping("/provider/{id}")
-    public ResponseEntity<Provider> getProvider(@PathVariable(value = "id") String id){
-        Provider prov = providerService.getProvider(id);
+    @ApiOperation(value = "Get a provider by generated id", response = Provider.class)
+    @GetMapping("/provider/{generatedId}")
+    public ResponseEntity<Provider> getProvider(@PathVariable(value = "generatedId") String generatedId){
+        Provider prov = providerService.getProvider(generatedId);
         if (prov!=null){
             return ResponseEntity.ok(prov);
         }else{
@@ -48,8 +48,25 @@ public class ProviderController {
                 Provider created = providerService.createProvider(provider);
                 return new ResponseEntity<>(created.getId(),HttpStatus.CREATED);
             }else{
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Username not available",HttpStatus.BAD_REQUEST);
             }
+    }
+
+    @ApiOperation(value = "Get provider by username",response = Provider.class)
+    @GetMapping("/provider/username/{id}")
+    public ResponseEntity<Provider> getClientByClientId(@PathVariable(value = "id") String id){
+        Provider cli = providerService.getProviderByCustId(id);
+        if (cli!= null){
+            return ResponseEntity.ok(cli);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Get availability of Username",response = Boolean.class)
+    @GetMapping("/provider/available/{userName}")
+    public ResponseEntity<Boolean> checkAvailability(@PathVariable(value = "userName") String userName){
+        return ResponseEntity.ok(providerService.isAvailable(userName));
     }
 
     @ApiOperation(value = "Update a provider")

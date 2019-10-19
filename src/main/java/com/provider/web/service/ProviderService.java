@@ -42,4 +42,8 @@ public class ProviderService {
 
         providerRepository.delete(delProvider);
     }
+
+    public boolean isAvailable(String userName){
+        return !providerRepository.existsByProviderId(userName);
+    }
 }
