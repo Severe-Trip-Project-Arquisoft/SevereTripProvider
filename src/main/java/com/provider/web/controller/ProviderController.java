@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/providers")
+@CrossOrigin(origins = "*")
 public class ProviderController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class ProviderController {
         if (prov!=null){
             return ResponseEntity.ok(prov);
         }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -59,7 +60,7 @@ public class ProviderController {
         if (cli!= null){
             return ResponseEntity.ok(cli);
         }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -77,7 +78,7 @@ public class ProviderController {
             providerService.deleteProvider(prov);
             providerService.createProvider(provider);
         }else{
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -89,7 +90,7 @@ public class ProviderController {
         if (pro!= null){
             providerService.deleteProvider(pro);
         }else{
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
